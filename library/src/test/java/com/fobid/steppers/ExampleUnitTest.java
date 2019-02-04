@@ -1,4 +1,4 @@
-package com.mealant.steppers;
+package com.fobid.steppers;
 
 import org.junit.Test;
 

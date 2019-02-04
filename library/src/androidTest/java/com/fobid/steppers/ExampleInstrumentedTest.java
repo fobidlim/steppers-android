@@ -1,4 +1,4 @@
-package com.mealant.steppers;
+package com.fobid.steppers;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.mealant.steppers.test", appContext.getPackageName());
+        assertEquals("com.fobid.steppers.test", appContext.getPackageName());
     }
 }
