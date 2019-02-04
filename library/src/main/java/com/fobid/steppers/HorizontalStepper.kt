@@ -1,5 +1,6 @@
 package com.fobid.steppers
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.support.annotation.IntRange
 import android.support.constraint.ConstraintLayout
@@ -21,11 +22,11 @@ class HorizontalStepper : ConstraintLayout, ViewPager.OnPageChangeListener {
     private var titleTextViews: Array<TextView?>? = null
     private var pager: ViewPager? = null
 
-    var onStepClickListener: OnStepClickListener? = null
+    private var onStepClickListener: OnStepClickListener? = null
 
     private var prevPosition: Int = 0
 
-    private val isValidate: Boolean
+    private val isValid: Boolean
         get() {
             if (pager == null) {
                 return false
@@ -41,11 +42,11 @@ class HorizontalStepper : ConstraintLayout, ViewPager.OnPageChangeListener {
         fun onStepClick(position: Int)
     }
 
-    constructor(context: Context) : super(context) {}
+    constructor(context: Context) : super(context)
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {}
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {}
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     fun setPager(pager: ViewPager?) {
         this.pager = pager
@@ -59,6 +60,7 @@ class HorizontalStepper : ConstraintLayout, ViewPager.OnPageChangeListener {
         }
     }
 
+    @SuppressLint("InflateParams")
     private fun drawStepper() {
         removeAllViews()
 
@@ -109,11 +111,9 @@ class HorizontalStepper : ConstraintLayout, ViewPager.OnPageChangeListener {
             }
 
             orderViews!![i]!!.setOnClickListener {
-                pager!!.setCurrentItem(i, true)
+                pager?.setCurrentItem(i, true)
 
-                if (onStepClickListener != null) {
-                    onStepClickListener!!.onStepClick(i)
-                }
+                onStepClickListener?.onStepClick(i)
             }
 
             addView(orderViews!![i])
@@ -159,7 +159,7 @@ class HorizontalStepper : ConstraintLayout, ViewPager.OnPageChangeListener {
     override fun onPageSelected(position: Int) {
         prevPosition = position
 
-        if (!isValidate) {
+        if (!isValid) {
             return
         }
         val count = pager!!.adapter.count
@@ -175,7 +175,7 @@ class HorizontalStepper : ConstraintLayout, ViewPager.OnPageChangeListener {
     fun setStep(@IntRange(from = 0) position: Int) {
         prevPosition = position
 
-        if (position < 0 || !isValidate) {
+        if (position < 0 || !isValid) {
             return
         }
 
